@@ -1,0 +1,30 @@
+extends layout 
+
+block content
+  body
+    .container-fluid
+      br
+      h1.text-center Registrar Usuario
+      br
+      .col-5 
+        h2 ⬤ Datos del Usuario
+        form(action='/administrar/registrarUsuario', method='post')
+          label.form-label(for='nombre') Nombre:
+          input#nombre.form-control(type='text', name='nombre', required='')
+          label.form-label(for='apellido') Apellido:
+          input#apellido.form-control(type='text', name='apellido', required='')
+          label.form-label(for='dni') DNI:
+          input#dni.form-control(type='text', name='dni', required='')
+          label.form-label(for='rol') Rol:
+          select#rol.form-select(name='rol', required='')
+            if (rol == 'Administrador')
+              option(value='Administrador') Administrador
+              option(value='Coordinador') Coordinador
+            option(value='Profesor') Profesor
+            option(value='Alumno') Alumno
+          label.form-label(for='email') Email:
+          input#email.form-control(type='email', name='email', required='')
+          label.form-label(for='password') Password:
+          input#password.form-control(type='password', name='password', required='')
+          br
+          input.btn.btn-dark(type='submit', value='Registrar Usuario')

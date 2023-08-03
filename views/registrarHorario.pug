@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    h1 Registrar Horario
+    form(action='/submit_materia', method='post')
+      label(for='name') Materia Name:
+      input#name(type='text', name='name', required='')
+      br
+      label(for='professor') Professor:
+      select#professor(name='professor', required='')
+        // You can dynamically generate the options for professors using server-side code
+        option(value='professor1') Professor 1
+        option(value='professor2') Professor 2
+        option(value='professor3') Professor 3
+        // Add more options as needed
+      br
+      input(type='submit', value='Create Horario')

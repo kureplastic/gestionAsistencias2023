@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    .container-fluid 
+        br
+        h1.text-center Horarios 
+        .col-4
+          h2 ⬤ Agregar Horario
+          br
+          form(action=`/administrar/Materia/${materia.id}/agregarHorario`, method="post") 
+            label.form-label(for='fechaInicio') Fecha de inicio de la clase:
+            input#fechaInicio.form-control(type='datetime-local', name='fechaInicio', required='')
+            br
+            label.form-label(for="horasCursada") Duracion de la clase
+            select#horasCursada.form-select(name="horasCursada")
+              option(value="") Seleccione una cantidad
+              option(value="1") 1 hora 
+              option(value="2") 2 horas
+              option(value="3") 3 horas
+              option(value="4") 4 horas
+            br   
+            input.btn.btn-dark(type='submit', value='Agregar')
+          br

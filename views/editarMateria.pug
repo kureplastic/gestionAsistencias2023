@@ -1,0 +1,78 @@
+extends layout 
+
+
+block content
+  - var dias = ['Dom','Lun', 'Mar', 'Mier', 'Jue', 'Vier', 'Sab'];
+  body
+    .container-fluid
+      br
+      h1.text-center #{materia.nombre}
+      br
+      .row
+        .col.col-md-4
+          h2 ⬤ Editar Materia
+          br
+          form(action=`/administrar/Materia/${materia.id}/editarMateria`, method='post')
+            label.form-label(for='nombre') Nombre Materia:
+            input#nombre.form-control(type='text', name='nombre', required='' value=`${materia.nombre}`)
+            label.form-label(for='profesorId') Profesor:
+            select#profesorId.form-select(name='profesorId')
+              if materia.profesorId != null 
+                  each profe in profesores 
+                      if materia.profesorId == profe.id 
+                          option(value=`${profe.id}`) #{profe.apellido + " " + profe.nombre} 
+                          option(value='') Quitar Profesor
+              else 
+                  option(value='') Seleccione una opcion
+              each profe in profesores
+                option(value=`${profe.id}`) #{profe.apellido + " " + profe.nombre} 
+
+            br
+            input.btn.btn-dark(type='submit', value='Editar')
+          br
+        .col.col-md-2 
+        .col.col-md-6
+          .col-6
+            h2 ⬤ Horarios
+            br 
+            h3 Agregar Horario de clase
+            br
+            form(action=`/administrar/Materia/${materia.id}/agregarHorario`, method="post") 
+              label.form-label(for='fechaInicio') Fecha de inicio de la clase:
+              input#fechaInicio.form-control(type='datetime-local', name='fechaInicio', required='')
+              label.form-label(for="horasCursada") Duracion de la clase:
+              select#horasCursada.form-select(name="horasCursada")
+                option(value="") Seleccione una cantidad
+                option(value="1") 1 hora 
+                option(value="2") 2 horas
+                option(value="3") 3 horas
+                option(value="4") 4 horas
+              br   
+              input.btn.btn-dark(type='submit', value='Agregar')
+            br
+          hr
+          h3 Horarios actuales
+          br
+          table.table.table-dark.table-hover.table-striped
+            thead
+              tr
+                th(scope="col") Num Clase
+                th(scope="col") Dia 
+                th(scope="col") Inicia 
+                th(scope="col") Finaliza
+                th(scope="col") Dia Libre 
+                th(scope="col") Gestionar 
+            tbody
+              each horario, index in horarios
+                tr 
+                  td #{index + 1 }
+                  td #{dias[horario.fechaInicio.getDay()] + "(" + horario.fechaInicio.getDate() + "/" + (horario.fechaInicio.getMonth() + 1) +")"}
+                  td #{horario.fechaInicio.getHours() + ":" + (horario.fechaInicio.getMinutes()<10?'00':horario.fechaInicio.getMinutes()) + "Hs"}
+                  td #{horario.fechaFin.getHours() + ":" + (horario.fechaFin.getMinutes() < 10 ? '00': horario.fechaFin.getMinutes()) + "Hs"}
+                  td #{horario.esDiaLibre ? "Si" : "No"}
+                  td
+                    a.link-light(href=`/administrar/Materia/${materia.id}/Horario/${horario.id}/AsignarDiaLibre`) Asignar Dia Libre |
+                    a.link-light(href=`/administrar/Materia/${materia.id}/Horario/${horario.id}/EliminarHorario`) Eliminar
+
+
+      

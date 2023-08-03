@@ -11,6 +11,7 @@ module.exports = {
       },
       alumnoId: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Usuarios', 
           key: 'id',
@@ -19,11 +20,15 @@ module.exports = {
       },
       materiaId: {
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: 'Materias', 
           key: 'id',
           as: 'materiaId'
         }
+      },
+      validacion: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

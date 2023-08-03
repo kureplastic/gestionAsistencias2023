@@ -14,8 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       Materia.belongsTo(models.Usuario, {
         foreignKey: 'profesorId'      
       });
-      Materia.belongsToMany(models.Usuario, { through: models.AlumnoMateria });
-      Materia.hasMany(models.Horario);
+      //Materia.hasMany(models.Horario);
     }
   }
   Materia.init({
@@ -24,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Materia',
+    tableName: 'materias',
   });
   return Materia;
 };

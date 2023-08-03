@@ -1,0 +1,52 @@
+extends layout 
+
+block content
+    .container-fluid 
+        br
+        h1.text-center Asistencias de #{materia.nombre}
+        br
+        .row
+            .col-6
+                h2 ⬤ Mis Asistencias
+                br
+                table.table.table-dark.table-hover.table-striped
+                    thead  
+                        tr
+                            th(scope='col') Num 
+                            th(scope='col') Fecha de asistencia
+                            th(scpoe='col') Hora de Registro
+                    tbody
+                        each asistencia, index in asistencias 
+                            tr 
+                                th(scope='row') #{index + 1}
+                                td #{ "(" + asistencia.horarioAsistencia.getDate() + "/" + (asistencia.horarioAsistencia.getMonth() + 1) + "/" + asistencia.horarioAsistencia.getFullYear() +")" }
+                                td #{asistencia.horarioAsistencia.getHours() + ":" + (asistencia.horarioAsistencia.getMinutes() < 10 ? '00': asistencia.horarioAsistencia.getMinutes()) + " Hs" }
+                br
+                form(action=`/Alumno/Materia/${materia.id}/AgregarAsistencia`, method="post")
+                    if ( asistenciaDisp )
+                        input.btn.btn-dark(type="submit", value="Añadir asistencia de hoy" )
+                    else
+                        span Aun no puede agregar la asistencia de hoy, si no se encuentra validado aun contacte con el Profesor a Cargo
+                        br
+                        input.btn.btn-dark(type="submit", value="Añadir asistencia de hoy" disabled)
+
+
+            .col-6
+                h2 ⬤ Clases de la Materia
+                br
+                table.table.table-dark.table-hover.table-striped
+                    thead 
+                        tr
+                            th(scope='col') Num Clase
+                            th(scope='col') Dia 
+                            th(scope='col') Inicia 
+                            th(scope='col') Finaliza
+                            th(scope='col') Dia Libre 
+                    tbody
+                        each horario, index in horarios
+                            tr 
+                                th(scope='row') #{index + 1 }
+                                td #{dias[horario.fechaInicio.getDay()] + "(" + horario.fechaInicio.getDate() + "/" + (horario.fechaInicio.getMonth() + 1) +")"}
+                                td #{horario.fechaInicio.getHours() + ":" + (horario.fechaInicio.getMinutes()<10?'00':horario.fechaInicio.getMinutes()) + " Hs"}
+                                td #{horario.fechaFin.getHours() + ":" + (horario.fechaFin.getMinutes() < 10 ? '00': horario.fechaFin.getMinutes()) + " Hs"}
+                                td #{horario.esDiaLibre ? "Si" : "No"}

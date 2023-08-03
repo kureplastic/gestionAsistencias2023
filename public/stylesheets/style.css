@@ -1,8 +1,37 @@
 body {
+  background-image: url('/images/homeLogo.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: 20%;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  
+}
+img {
+  opacity: 0.5;
 }
 
 a {
   color: #00B7FF;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin: 5px 0;
+}
+/* Styling for different roles */
+.admin-list {
+  color: red;
+}
+.coordinator-list {
+  color: blue;
+}
+.professor-list {
+  color: green;
+}
+.student-list {
+  color: purple;
 }

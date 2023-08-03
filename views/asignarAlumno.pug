@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    .container-fluid 
+    br
+    h1.text-center Asignar Alumno
+    br
+    .col-3
+      h2 ⬤ Asignar
+      form(action='/administrar/asignarAlumno', method='post')
+        label.form-label(for='materiaId') Materia:
+        select#materiaId.form-select(name='materiaId', required='')
+          option(value='') Seleccione una
+          each materia in materias 
+            option(value=`${materia.id}`) #{materia.nombre}
+        label.form-label(for='alumnoId') Alumno:
+        select#alumnoId.form-select(name='alumnoId', required='')
+          option(value='') Seleccione uno
+          each alumno in alumnos 
+            option(value=`${alumno.id}`) #{alumno.apellido + ' ' + alumno.nombre}
+        br
+        input.btn.btn-dark(type='submit', value='Asignar')

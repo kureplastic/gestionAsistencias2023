@@ -21,7 +21,9 @@ module.exports = (sequelize, DataTypes) => {
   Horario.init({
     materiaId: DataTypes.INTEGER,
     fechaInicio: DataTypes.DATE,
-    fechaFin: DataTypes.DATE
+    fechaFin: DataTypes.DATE,
+    esDiaLibre: DataTypes.BOOLEAN
+
   }, {
     sequelize,
     modelName: 'Horario',

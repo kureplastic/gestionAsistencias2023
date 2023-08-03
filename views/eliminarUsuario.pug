@@ -1,0 +1,27 @@
+extends layout 
+
+block content
+    .contaier-fluid 
+        br
+        h1.text-center Eliminar Usuario
+        br
+        h2 ⬤ Usuario
+        h3 Esta seguro que desea eliminar el usuario?
+        br 
+        ul
+            li 
+                b Nombre: 
+                | #{usuario.nombre} 
+            li 
+                b Apellido: 
+                | #{usuario.apellido}
+            li 
+                b Email: 
+                | #{usuario.email}  
+            li 
+                b Rol: 
+                | #{usuario.rol} 
+        br
+        form(action=`/administrar/Usuario/${usuario.id}/eliminarUsuario`, method="post")
+            br
+            input.btn.btn-dark(type='submit', value='Eliminar')

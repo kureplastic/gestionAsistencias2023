@@ -2,30 +2,37 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Horarios', {
+    await queryInterface.createTable('Asistencia', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      alumnoId: {
+        type: Sequelize.INTEGER,
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION',
+        references: {
+          model: 'Usuarios',
+          key: 'id',
+          as: 'alumnoId',
+        }
+      },
       materiaId: {
         type: Sequelize.INTEGER,
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION',
         references: {
-          model: 'Materias', 
+          model: 'Materias',
           key: 'id',
-          as: 'materiaId'
-        },
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
+          as: 'materiaId',
+        }
       },
-      esDiaLibre: {
-        type: Sequelize.BOOLEAN
-      },
-      fechaInicio: {
+      horarioClase: {
         type: Sequelize.DATE
       },
-      fechaFin: {
+      horarioAsistencia: {
         type: Sequelize.DATE
       },
       createdAt: {
@@ -39,6 +46,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Horarios');
+    await queryInterface.dropTable('Asistencia');
   }
 };

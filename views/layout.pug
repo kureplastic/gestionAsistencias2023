@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title= "Gestion Asistencias"
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous")
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js')
+    - var dias = ['Dom','Lun', 'Mar', 'Mier', 'Jue', 'Vier', 'Sab'];
+  
+    body(style= "background-color: #c2d1ff")
+      nav.navbar.fixed-top.bg-body-tertiary(data-bs-theme='dark')
+        .container-fluid
+          a.navbar-brand.fs-3(href='/home') Gestion Asistencias 2023
+          span.navbar-text
+            a.link-dark.btn.btn-light(href="/logout") Cerrar Sesion
+      br
+      block content
+    

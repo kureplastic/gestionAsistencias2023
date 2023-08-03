@@ -1,0 +1,74 @@
+extends layout
+
+block content
+    .container-fluid 
+        br
+        h1.text-center #{materia.nombre}
+        br
+        .row 
+            .col-4 
+                h2 ⬤ Horarios
+                br
+                table.table.table-dark.table-hover.table-striped
+                    thead 
+                        tr
+                            th(scope='col') Num Clase
+                            th(scope='col') Dia 
+                            th(scope='col') Inicia 
+                            th(scope='col') Finaliza
+                            th(scope='col') Dia Libre 
+                            th(scope='col') Gestionar
+                    tbody
+                        each horario, index in horarios
+                            tr 
+                                th(scope='row') #{index + 1 }
+                                td #{dias[horario.fechaInicio.getDay()] + "(" + horario.fechaInicio.getDate() + "/" + (horario.fechaInicio.getMonth() + 1) +")"}
+                                td #{horario.fechaInicio.getHours() + ":" + (horario.fechaInicio.getMinutes()<10?'00':horario.fechaInicio.getMinutes()) + " Hs"}
+                                td #{horario.fechaFin.getHours() + ":" + (horario.fechaFin.getMinutes() < 10 ? '00': horario.fechaFin.getMinutes()) + " Hs"}
+                                td #{horario.esDiaLibre ? "Si" : "No"}
+                                td
+                                    a.link-light(href=`/profesor/Materia/${materia.id}/Horario/${horario.id}/AsignarDiaLibre`) Dia Libre | 
+                                    a.link-light(href=`/profesor/Materia/${materia.id}/Horario/${horario.id}/EliminarHorario`) Eliminar 
+                br
+                a.btn.btn-dark(href=`/profesor/Materia/${materia.id}/agregarHorario`) Agregar Horario 
+                |  
+                a.btn.btn-dark(href=`/profesor/Materia/${materia.id}/gestionarAsistencias`) Ver Asistencias 
+            .col-4 
+                h2 ⬤ Alumnos Inscriptos
+                br
+                table.table.table-dark.table-hover.table-striped
+                    thead  
+                        tr
+                            th(scope='col') Num 
+                            th(scope='col') Nombre
+                            th(scope='col') Apellido  
+                            th(scope='col') Email  
+                    tbody
+                        each alumno, index in alumnos
+                            tr 
+                                th(scope='row') #{index + 1}
+                                td #{alumno.nombre}
+                                td #{alumno.apellido}
+                                td #{alumno.email}
+                br
+            .col-4 
+                h2 ⬤ Validaciones Pendientes
+                br
+                table.table.table-dark.table-hover.table-striped
+                    thead 
+                        tr
+                            th(scope='col') Num 
+                            th(scope='col') Nombre
+                            th(scope='col') Apellido  
+                            th(scope='col') Email    
+                            th(scope='col') Validacion 
+                    tbody
+                        each alumnoSV, index in alumnosSinValidar 
+                            tr 
+                                th(scope='row') #{index + 1}
+                                td #{alumnoSV.nombre}
+                                td #{alumnoSV.apellido} 
+                                td #{alumnoSV.email} 
+                                td 
+                                    form(action=`/profesor/Materia/${materia.id}/Alumno/${alumnoSV.id}/Validar`, method="post") 
+                                        input.btn.btn-light(type="submit", value="Validar")

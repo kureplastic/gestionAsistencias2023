@@ -1,0 +1,30 @@
+extends layout 
+
+block content
+    .container
+        br
+        .row 
+            h1.text-center Iniciar Sesion
+        br 
+        .row
+            h3.text-center Ingrese sus datos para iniciar sesion  
+            br
+            if ( error != null )
+                p.text-danger.text-center #{error} 
+        .row 
+            .col-4
+                br
+            .col-4
+                br 
+                form(action="/login", method="post")
+                    .mb-3
+                        label.form-label(for="email") Email: 
+                        input#email.form-control(type="email", name="email" required="") 
+                    .mb-3
+                        label.form-label(for="password") Contraseña: 
+                    input#password.form-control(type="password", name="password" required="") 
+                    br
+                    input.btn.btn-dark(type="submit", value="Iniciar Sesion")
+                
+
+

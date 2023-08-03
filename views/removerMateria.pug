@@ -1,0 +1,13 @@
+extends layout 
+
+block content
+    .container-fluid
+        br 
+        h1.text-center Remover Materia 
+        br
+        h3 #{materia.nombre}
+        br
+        h4 Esta seguro que desea remover dicha materia de Materias asignadas?
+        br
+        form(action=`/Alumno/Materia/${materia.id}/RemoverMateria`, method="post") 
+            input.btn.btn-dark(type="submit", value="Eliminar")

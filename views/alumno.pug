@@ -1,0 +1,57 @@
+extends layout
+
+block content
+    .container-fluid
+        br
+        include notificacion
+        br
+        h1.text-center Bienvenido, #{usuario.nombre}!
+        br
+        .row 
+            .col-6
+                h2 ⬤ Tus Datos
+                br
+                ul
+                    li 
+                        b Nombre: 
+                        | #{usuario.nombre}
+                    li 
+                        b Apellido: 
+                        | #{usuario.apellido}
+                    li 
+                        b DNI: 
+                        | #{usuario.dni}
+                    li 
+                        b Email: 
+                        | #{usuario.email}
+                a.btn.btn-dark(href="/alumno/editarPerfil") Editar Perfil
+                br
+            .col-6 
+                h2 ⬤ Tus Materias
+                br
+                .col
+                    table.table.table-dark.table-hover.table-striped
+                        thead
+                            tr
+                                th(scope='col') Num 
+                                th(scope='col') Nombre 
+                                th(scope='col') Validacion
+                                th(scope='col') Gestion 
+                                th(scope='col') Asistencia
+                        tbody
+                            each materia, index in materias 
+                                tr 
+                                    th(scope='row') #{index + 1}
+                                    td #{materia.nombre} 
+                                    if (materia.validacion == 1)
+                                        td Validada
+                                    else 
+                                        td Sin Validar
+
+                                    td 
+                                        a.link-light(href=`/alumno/Materia/${materia.id}/RemoverMateria`)  Eliminar 
+                                    td 
+                                        a.link-light(href=`/alumno/Materia/${materia.materiaId}/VerAsistencias`)  Ver Asistencias
+                            
+                br
+                a.btn.btn-dark(href="/alumno/agregarMateria") Agregar Materia

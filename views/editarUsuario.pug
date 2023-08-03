@@ -1,0 +1,68 @@
+extends layout 
+
+block content
+    .container-fluid 
+      br
+      h1.text-center Editar Usuario
+      br
+      .row 
+        .col.col-md-4
+          h2 ⬤ Datos personales
+          form(action=`/administrar/Usuario/${usuario.id}/editarUsuario`, method='post')
+            label.form-label(for='nombre') Nombre:
+            input#nombre.form-control(type='text', name='nombre', required='' value=`${usuario.nombre}`)
+            label.form-label(for='apellido') Apellido:
+            input#apellido.form-control(type='text', name='apellido', required='' value=`${usuario.apellido}`)
+            label.form-label(for='dni') DNI:
+            input#dni.form-control(type='text', name='dni', required='' value=`${usuario.dni}`)
+            label.form-label(for='rol') Rol:
+            select#rol.form-select(name='rol', required='')
+              option(value=`${usuario.rol}`) #{usuario.rol}
+              if (usuario.rol == "Administrador")
+                option(value='Administrador') Administrador
+                option(value='Coordinador') Coordinador
+              option(value='Profesor' ) Profesor
+              option(value='Alumno') Alumno
+            label.form-label(for='email') Email:
+            input#email.form-control(type='email', name='email', required='' value=`${usuario.email}`)
+            br
+            input.btn.btn-dark(type='submit', value='Editar')
+        .col.col-md-2
+        .col.col-md-4
+          h2 ⬤ Restablecer Contraseña
+          br
+          form(action=`/administrar/Usuario/${usuario.id}/restablecerPassword`, method="post")
+              input.btn.btn-dark(type="submit", value="Restablecer")
+          br
+          hr
+          h2 ⬤ Modificar Contraseña
+          form(action=`/administrar/Usuario/${usuario.id}/cambiarPassword`, method="post")
+              label.form-label(for='password') Contraseña:
+              input#password.form-control(type='password', name='password', required='')
+              label.form-label(for='passwordRepetir') Repetir contraseña:
+              input#password.form-control(type='password', name='passwordRepetir', required='')
+              br
+              input.btn.btn-dark(type="submit", value="Modificar")
+          br
+          
+          if (usuario.rol == "Alumno")
+            hr
+            h2 ⬤ Materias Asignadas
+            br 
+            table.table.table-dark.table-hover.table-striped
+              thead
+                tr 
+                  th Num 
+                  th Nombre 
+                  th Gestionar
+              tbody 
+                each materia, index in materias 
+                  tr 
+                    td #{index + 1}
+                    td #{materia.materiaId}       
+                    td 
+                      a.link-light(href=`/administrar/Usuario/${materia.alumnoId}/Materia/${materia.materiaId}/AgregarAsistencia`) Agregar Asistencia 
+                      | | 
+                      a.link-light(href=`/administrar/Usuario/${materia.alumnoId}/Materia/${materia.materiaId}/RemoverMateria`) Remover Materia
+
+      

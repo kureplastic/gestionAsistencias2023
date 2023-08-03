@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class AlumnoMateria extends Model {
+  class Asistencia extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,25 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      AlumnoMateria.hasOne(models.Usuario, {
+      Asistencia.hasOne(models.Usuario, {
         foreignKey: 'id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'      
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION'      
       });
-      AlumnoMateria.hasOne(models.Materia, {
+      Asistencia.hasOne(models.Materia, {
         foreignKey: 'id',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'      
+        onDelete: 'NO ACTION',
+        onUpdate: 'NO ACTION'      
       });
     }
   }
-  AlumnoMateria.init({
+  Asistencia.init({
     alumnoId: DataTypes.INTEGER,
     materiaId: DataTypes.INTEGER,
-    validacion: DataTypes.BOOLEAN
+    horarioClase: DataTypes.DATE,
+    horarioAsistencia: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'AlumnoMateria',
+    modelName: 'Asistencia',
   });
-  return AlumnoMateria;
+  return Asistencia;
 };

@@ -1,0 +1,18 @@
+extends layout 
+
+block content 
+    .container-fluid 
+        br
+        h1.text-center Eliminar Materia
+        br
+        h2 ⬤ Materia
+        h3 Esta seguro que desea eliminar la materia?
+        br 
+        ul
+            li 
+                b Nombre: 
+                | #{materia.nombre}  
+        br
+        form(action=`/administrar/Materia/${materia.id}/eliminarMateria`, method="post")
+            br
+            input.btn.btn-dark(type='submit', value='Eliminar')

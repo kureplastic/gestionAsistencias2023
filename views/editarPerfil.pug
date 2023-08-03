@@ -1,0 +1,40 @@
+extends layout 
+
+block content
+    .container-fluid
+      br
+      h1.text-center Editar Perfil
+      br
+      .row 
+        .col-3 
+          h2 ⬤ Datos
+          br     
+          form(action='/Alumno/editarPerfil', method='post')
+            label.form-label(for='nombre') Nombre:
+            input#nombre.form-control(type='text', name='nombre', required='' value= `${usuario.nombre}`)
+            label.form-label(for='apellido') Apellido:
+            input#apellido.form-control(type='text', name='apellido', required='' value= `${usuario.apellido}`)
+            label.form-label(for='dni') DNI:
+            input#dni.form-control(type='number', name='dni', required='' value= `${usuario.dni}`)
+            label.form-label(for='email') Email:
+            input#email.form-control(type='email', name='email', required=''  value= `${usuario.email}`)
+            br
+            input.btn.btn-dark(type='submit', value='Editar')
+        .col-3 
+        .col-3 
+          h2 ⬤ Modificar Contraseña
+          br
+          form(action=`/Alumno/cambiarPassword`, method="post")
+            label.form-label(for="passwordViejo") Contraseña actual
+            input#passwordViejo.form-control(type="password", name="passwordViejo") 
+            label.form-label(for='password') Contraseña nueva:
+            input#password.form-control(type='password', name='password', required='')
+            label.form-label(for='passwordConfirmar') Confirmar contraseña nueva:
+            input#passwordConfirmar.form-control(type='password', name='passwordConfirmar', required='')
+            br
+            input.btn.btn-dark(type="submit", value="Modificar")
+            br
+            include notificacion
+
+
+          

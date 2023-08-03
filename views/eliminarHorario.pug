@@ -1,0 +1,26 @@
+extends layout 
+
+block content
+    .container-fluid
+        br
+        h1.text-center Eliminar Horario
+        br
+        h2 ⬤ Horario
+        h3 Esta seguro que desea eliminar el horario?
+        br
+        ul 
+            li 
+                b Dia:  
+                | #{dias[horario.fechaInicio.getDay()] + "(" + horario.fechaInicio.getDate() + "/" + horario.fechaInicio.getMonth() +")"}
+            li 
+                b Hora Inicio: 
+                | #{horario.fechaInicio.getHours() + ":" + (horario.fechaInicio.getMinutes()<10?'00':horario.fechaInicio.getMinutes()) + "Hs"}
+            li 
+                b Hora Fin: 
+                | #{horario.fechaFin.getHours() + ":" + (horario.fechaFin.getMinutes() < 10 ? '00': horario.fechaFin.getMinutes()) + "Hs"}
+            li 
+                b Asignado dia Libre: 
+                | #{horario.esDiaLibre ? "Si" : "No"}
+        br
+        form(action=`/administrar/Materia/${horario.materiaId}/Horario/${horario.id}/eliminarHorario`, method="post")
+            input.btn.btn-dark(type="submit", value="Eliminar")

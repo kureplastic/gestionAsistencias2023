@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    .container-fluid
+      br
+      h1.text-center Agregar Materia
+      br
+      .col-3
+        form(action='/Alumno/AgregarMateria', method='post')
+          label.form-label(for='materia') Materia:
+          select#materia.form-select.form-select-lg.mb-3(name='materia', required='')
+            option(value='') Seleccione una
+            each materia in materias 
+              option(value=`${materia.id}`) #{materia.nombre} 
+          br
+          input.btn.btn-dark(type='submit', value='Agregar')
+        include notificacion

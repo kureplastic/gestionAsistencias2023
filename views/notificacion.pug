@@ -1,0 +1,11 @@
+if ( notificar != null )
+        if ( notificar.tipo == "correcto" )
+          .alert.alert-success.alert-dismissible
+            a.close(href='#', data-dismiss='alert', aria-label='close') &times;
+            strong Correcto! 
+            | #{notificar.msj}
+        else if (notificar.tipo == "error")
+          .alert.alert-danger.alert-dismissible
+            a.close(href='#', data-dismiss='alert', aria-label='close') &times;
+            strong Error! 
+            | #{notificar.msj}

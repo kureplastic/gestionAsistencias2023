@@ -1,0 +1,136 @@
+extends layout 
+
+block content
+    .container-fluid
+      br
+      include notificacion
+      h1.text-center  Bienvenido, #{usuario.nombre}!
+      br 
+    h2.text-center Gestionar
+    br
+    .row
+      .col.text-center
+        a.btn.btn-dark(href="/administrar/registrarUsuario") Registrar Usuario
+        | 
+        a.btn.btn-dark(href="/administrar/registrarMateria") Registrar Materia 
+        | 
+        a.btn.btn-dark(href="/administrar/asignarAlumno") Asignar Alumno
+        | 
+    hr
+    .row 
+      .col.col-md-4
+        h2 ⬤ Alumnos
+        br
+        table.table.table-dark.table-hover.table-striped 
+          thead 
+            tr
+            th(scope="col") Num 
+            th(scope="col") Apellido
+            th(scope="col") Nombre
+            th(scope="col") Email
+            th(scope="col") Gestionar 
+          tbody
+            each alumno, index in alumnos
+              tr 
+                td #{index + 1}
+                td #{alumno.apellido}
+                td #{alumno.nombre}
+                td #{alumno.email}
+                td
+                  a.link-light(href=`/administrar/Usuario/${alumno.id}/eliminarUsuario`) Eliminar |
+                  a.link-light(href=`/administrar/Usuario/${alumno.id}/editarUsuario`) Editar
+        br
+      .col.col-md-4
+        h2 ⬤ Profesores
+        table.table.table-dark.table-hover.table-striped
+          thead 
+            tr
+              th(scope="col") Num 
+              th(scope="col") Apellido
+              th(scope="col") Nombre
+              th(scope="col") Email
+              th(scope="col") Gestionar  
+          tbody 
+            each profe, index in profesores 
+              tr 
+                td #{index + 1}
+                td #{profe.apellido}
+                td #{profe.nombre}
+                td #{profe.email}
+                td
+                  a.link-light(href=`/administrar/Usuario/${profe.id}/eliminarUsuario`) Eliminar |
+                  a.link-light(href=`/administrar/Usuario/${profe.id}/editarUsuario`) Editar
+          br
+      if (usuario.rol == "Administrador")     
+        .col.col-md-4
+          h2 ⬤ Coordinadores
+          br
+          table.table.table-dark.table-hover.table-striped
+              thead 
+                tr
+                  th(scope="col") Num 
+                  th(scope="col") Apellido
+                  th(scope="col") Nombre
+                  th(scope="col") Email
+                  th(scope="col") Gestionar
+              tbody
+                each coord, index in coordinadores
+                  tr
+                    td #{index + 1}
+                    td #{coord.apellido}
+                    td #{coord.nombre}
+                    td #{coord.email}
+                    td
+                      a.link-light(href=`/administrar/Usuario/${coord.id}/eliminarUsuario`) Eliminar |
+                      a.link-light(href=`/administrar/Usuario/${coord.id}/editarUsuario`) Editar
+          br
+    .row
+      if (usuario.rol == "Administrador") 
+        .col.col-md-4 
+          h2 ⬤ Administradores
+          br
+          table.table.table-dark.table-hover.table-striped
+            thead
+              tr
+                th(scope="col") Num 
+                th(scope="col") Apellido
+                th(scope="col") Nombre
+                th(scope="col") Email
+                th(scope="col") Gestionar  
+            tbody
+              each admin, index in admins 
+                tr 
+                  td #{index + 1}
+                  td #{admin.apellido}
+                  td #{admin.nombre}
+                  td #{admin.email}
+                  td
+                    a.link-light(href=`/administrar/Usuario/${admin.id}/eliminarUsuario`) Eliminar |
+                    a.link-light(href=`/administrar/Usuario/${admin.id}/editarUsuario`) Editar
+      br
+    .row 
+      .col.col-md-4
+        h2 ⬤ Materias
+        br
+        table.table.table-dark.table-hover.table-striped
+          thead
+            tr
+              th(scope="col") Num
+              th(scope="col") Nombre
+              th(scope="col") Profesor Encargado 
+              th(scope="col") Gestion
+          tbody
+            each materia, index in materias
+              tr
+                td #{index + 1}
+                td #{materia.nombre}
+                if (materia.profesorId != null)
+                  each profe in profesores
+                    if (profe.id == materia.profesorId)
+                      td #{profe.apellido + " " + profe.nombre} 
+                else 
+                  td no tiene
+                td
+                  a.link-light(href=`/administrar/Materia/${materia.id}/eliminarMateria`) Eliminar |
+                  a.link-light(href=`/administrar/Materia/${materia.id}/editarMateria`) Editar
+    

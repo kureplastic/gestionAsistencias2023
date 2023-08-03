@@ -1,0 +1,23 @@
+extends layout 
+
+block content
+  body
+    .container-fluid
+      br
+      h1.text-center Registrar Materia
+      br
+      .col-3 
+        h2 ⬤ Datos Materia 
+        br
+        form(action='/administrar/registrarMateria', method='post')
+          label.form-label(for='nombre') Nombre Materia:
+          input#name.form-control(type='text', name='nombre', required='')
+          br
+          label.form-label(for='profesorId') Profesor:
+          select#profesorId.form-select(name='profesorId')
+            option(value='') Seleccione una opcion
+            each profe in profesores
+              option(value=`${profe.id}`) #{profe.apellido + " " + profe.nombre} 
+
+          br
+          input.btn.btn-dark(type='submit', value='Registrar')
